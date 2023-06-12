@@ -46,6 +46,8 @@
             class="input-error input-xxlarge"
             v-model="keyword"
           />
+          <!-- 上面这个keyword是用来收集数据，来显示到表单上面 -->
+          <!-- 自己写的  编程式导航 -->
           <button
             class="sui-btn btn-xlarge btn-danger"
             type="button"
@@ -64,7 +66,7 @@ export default {
   name: "",
   data() {
     return {
-      //响应式数据，用于收集表单元素文本内容
+      //响应式数据，用于收集表单元素文本内容，然后显示到url路径上
       keyword: "",
     };
   },
@@ -79,6 +81,15 @@ export default {
         };
         loction.query = this.$route.query;
         this.$router.push(loction);
+        // 路由传递参数
+        // 第一种：字符串形式
+        // this.$router.push("/search" + this.keyword+"?k="+this.keyword.toUpperCase());
+        // 第二种：模板字符串。
+        // this.$router.push(`/search/${this.keyword}?k=${this.keyword.toUpperCase()} `);
+        // 第三种:对象，一般都用这种方法
+        // this.$router.push({name:"search",params:{keyword: this.keyword},quety:{k:this.keyword.toUpperCase()}});
+
+
       }
     },
     //退出登录
@@ -110,7 +121,7 @@ export default {
   }
 };
 </script>
-
+<!-- 这个scoped是让这个样式只会影响到自己 -->
 <style scoped lang="less">
 .header {
   & > .top {
